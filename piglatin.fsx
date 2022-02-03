@@ -5,7 +5,7 @@ open System
 let sentence = Console.ReadLine()
 
 let voc = ['a'; 'e'; 'i'; 'o'; 'u'; 'y'; 'x'; 'ä'; 'ü'; 'ö']
-let pl (input : String) : String =
+let piglatin (input : String) : String =
     let words = (input.ToLower()).Split [|' '|]
     let mutable output = ""
     for i in words do
@@ -15,4 +15,4 @@ let pl (input : String) : String =
         else output <- output + i.[1..] + string i.[0]+ "ey "
     output
 
-printf "%A" (pl sentence)
+printf "%A" (piglatin sentence)
