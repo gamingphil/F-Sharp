@@ -4,11 +4,11 @@ open System
 
 let totalTime = Diagnostics.Stopwatch.StartNew()
 
-let alphabet = [ 'a' .. 'z' ]
 let print x =
     printf "%A\n" x
     |> ignore
 
+// let alphabet = [ 'a' .. 'z' ]
 // let lettersum (input : String) =
 //     let letterArray = Seq.toList (input.ToLower())
 //     let mutable num = 0
@@ -62,39 +62,43 @@ print (lettersum("microspectrophotometries")) // 317
 
 
 let wordList = (System.IO.File.ReadAllText "G:/Philip/Media/Programme/F#/enable1.txt").Split [|'\n'|]
+let bonus1 =
+    let mutable output = []
+    for i in wordList do
+        if (lettersum i) = 319 then output <- [i] |> List.append output
+    print output
+bonus1
 
-let mutable bonus1 = []
-for i in wordList do
-    if (lettersum i) = 319 then bonus1 <- [i] |> List.append bonus1
-print bonus1
-
-let mutable bonus2 = 0
-for i in wordList do
-    if (lettersum i) % 2 = 1 then bonus2 <- bonus2 + 1
-print bonus2
-
+let bonus2 =
+    let mutable output = 0
+    for i in wordList do
+        if (lettersum i) % 2 = 1 then output <- output + 1
+    print output
+bonus2
 
 // the highest lettersum is 319
-let lettersums : int array = Array.zeroCreate(320) 
-for i in wordList do
-    lettersums[lettersum i] <- lettersums[lettersum i] + 1
-print lettersums
+let bonus3 =
+    let lettersums : int array = Array.zeroCreate(320) 
+    for i in wordList do
+        lettersums[lettersum i] <- lettersums[lettersum i] + 1
+    print lettersums
 
-let mutable max = 0
-let mutable max_index = 0
-let mutable n = 0
-for i in lettersums do
-    if i > max 
-    then 
-        max <- i
-        max_index <- n
-    n <- n + 1
-printf "Most common lettersum: %A\nFrequency: %A\n" max_index max
+    let mutable max = 0
+    let mutable max_index = 0
+    let mutable n = 0
+    for i in lettersums do
+        if i > max 
+        then 
+            max <- i
+            max_index <- n
+        n <- n + 1
+    printf "Most common lettersum: %A\nFrequency: %A\n" max_index max
+bonus3
 
 // get all words with 11 letter length difference
 let bonus4 =
     let wordPairs = Array.init 2 (fun _ -> Array.create 2 "")
-    n <- 0
+    let mutable n = 0
     for i in wordList do
         for x in wordList do
             if (String.length x) - (String.length i) = 11 && lettersum i = lettersum x
@@ -110,16 +114,17 @@ let bonus4 =
 
 let bonus5 = 
     let wordPairs = Array.init 3 (fun _ -> Array.create 2 "")
-    n <- 0
+    let mutable n = 0
     for i in wordList do
         for x in wordList do
-            if (lettersum i > 188 && lettersum i = lettersum x && (*check for letter machtes*))
+            if (lettersum i > 188 && lettersum i = lettersum x)
             then
                 wordPairs.[n].[0] <- i
-        wordPairs.[n].[1] <- x
+            wordPairs.[n].[1] <- x
         n <- n + 1
     print wordPairs
     |>ignore
+bonus5
 
 totalTime.Stop()
 printf "Total execution time: %fms" totalTime.Elapsed.TotalMilliseconds
