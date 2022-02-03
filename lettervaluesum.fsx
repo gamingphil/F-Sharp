@@ -61,7 +61,7 @@ print (lettersum("excellent")) // 100
 print (lettersum("microspectrophotometries")) // 317
 
 
-let wordList = (System.IO.File.ReadAllText "G:/Philip/Media/Programme/F#/enable1.txt").Split [|'\n'|]
+let wordList = (System.IO.File.ReadAllText "G:/Philip/Media/Programme/F-Sharp/enable1.txt").Split [|'\n'|]
 let bonus1 =
     let mutable output = []
     for i in wordList do
@@ -109,22 +109,32 @@ let bonus4 =
                 printf "n incr to: %A\n" n
     print wordPairs
     |>ignore 
-// bonus4
+bonus4
 // voluptuously, electroencephalographic; zyzzyva, biodegradabilities
 
+let commonLetters (k : String) (f : String) : Boolean =
+    let mutable LetterMatch = false
+    let str1 = Seq.toList (k.ToLower())
+    let str2 = Seq.toList (f.ToLower())
+    for i in str1 do
+        for x in str2 do
+            if(i = x) then LetterMatch <- true
+    LetterMatch
+
 let bonus5 = 
-    let wordPairs = Array.init 3 (fun _ -> Array.create 2 "")
+    let wordPairs = Array.init 15 (fun _ -> Array.create 2 "")
     let mutable n = 0
     for i in wordList do
         for x in wordList do
-            if (lettersum i > 188 && lettersum i = lettersum x)
+            if (lettersum i > 188 && lettersum i = lettersum x && commonLetters i x = false)
             then
                 wordPairs.[n].[0] <- i
-            wordPairs.[n].[1] <- x
-        n <- n + 1
+                wordPairs.[n].[1] <- x
+                n <- n + 1
+                printf "Match: %A; %A\n" i x
     print wordPairs
     |>ignore
 bonus5
-
+// defenselessnesses", "microphotographic"; "defenselessnesses", "photomicrographic"
 totalTime.Stop()
 printf "Total execution time: %fms" totalTime.Elapsed.TotalMilliseconds
