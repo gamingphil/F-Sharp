@@ -121,12 +121,19 @@ let commonLetters (k : String) (f : String) : Boolean =
             if(i = x) then LetterMatch <- true
     LetterMatch
 
+let checkDuplicate (a : Array) (s1 : String) (s2 : String) : Boolean = 
+    let mutable isDuplicate = false
+    for i in a do
+        if i = [s2, s1] then isDuplicate <- true
+    isDuplicate
+
+
 let bonus5 = 
     let wordPairs = Array.init 15 (fun _ -> Array.create 2 "")
     let mutable n = 0
     for i in wordList do
         for x in wordList do
-            if (lettersum i > 188 && lettersum i = lettersum x && commonLetters i x = false)
+            if (lettersum i > 188 && lettersum i = lettersum x && commonLetters i x = false && Duplicate(wordPairs i x) = false)
             then
                 wordPairs.[n].[0] <- i
                 wordPairs.[n].[1] <- x
