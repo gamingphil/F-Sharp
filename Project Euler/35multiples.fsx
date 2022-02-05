@@ -1,7 +1,5 @@
 // https://projecteuler.net/problem=1
 
-open System
-
 let numbers = [1 .. 1000]
 
 let mutable sum = 0
