@@ -133,7 +133,7 @@ let bonus5 =
     let mutable n = 0
     for i in wordList do
         for x in wordList do
-            if (lettersum i > 188 && lettersum i = lettersum x && commonLetters i x = false && Duplicate(wordPairs i x) = false)
+            if (lettersum i > 188 && lettersum i = lettersum x && commonLetters i x = false && checkDuplicate wordPairs i x = false)
             then
                 wordPairs.[n].[0] <- i
                 wordPairs.[n].[1] <- x
