@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-evenfibonacci",
+      "appliesTo": "Project Euler/evenfibonacci.fs",
+      "type": "launch"
+    }
+  ]
+}
