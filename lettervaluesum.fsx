@@ -61,7 +61,7 @@ print (lettersum("excellent")) // 100
 print (lettersum("microspectrophotometries")) // 317
 
 
-let wordList = (System.IO.File.ReadAllText "G:/Philip/Media/Programme/F-Sharp/enable1.txt").Split [|'\n'|]
+let wordList = Seq.toArray (System.IO.File.ReadLines "./enable1.txt")
 let bonus1 =
     let mutable output = []
     for i in wordList do
